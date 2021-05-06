@@ -2,10 +2,10 @@ let header = document.getElementById("subheading");
 let button = document.getElementById("greatestButton");
 let checkingButton = document.getElementById('checkingIfButton');
 
-
 header.innerText = "jumaaaaanji";
 
 
+console.log(message);
 
 button.addEventListener("click", () => {
   let comments = document.getElementById("commentBox").value;
@@ -16,7 +16,6 @@ button.addEventListener("click", () => {
 
   postAPerson(comments);
 
-//   postALongString(comments);
 });
 
 function postAPerson(name) {
@@ -28,7 +27,6 @@ function postAPerson(name) {
 
   fetch("http://localhost:8080/mail-send", {
   method: "POST",
-//   headers: "no-cors",
   body: name,
   })
 }

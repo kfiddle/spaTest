@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.annotation.Resource;
+import java.io.*;
 import java.util.Collection;
 import java.util.Properties;
 
@@ -33,13 +34,21 @@ public class PersonController {
     }
 
     @PostMapping ("/mail-send")
-    public void sendEmail(@RequestBody String commentsToSend) {
+    public void sendEmail(@RequestBody String commentsToSend) throws IOException {
+
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
         mailSender.setUsername("kenjfiddle@gmail.com");
         mailSender.setPassword("Grandbanks1");
+
+
+        File configFile = new File("application.properties");
+        InputStream inputStream = new FileInputStream(configFile);
+        Properties props = new Properties();
+
+        props.load(inputStream);
 
         Properties properties = new Properties();
         properties.setProperty("mail.smtp.auth", "true");
@@ -48,7 +57,7 @@ public class PersonController {
         mailSender.setJavaMailProperties(properties);
 
         String from = "kenjfiddle@gmail.com";
-        String to = "mariacastrovinas@gmail.com";
+        String to = "kenjfiddle@gmail.com";
 
         SimpleMailMessage message = new SimpleMailMessage();
 
